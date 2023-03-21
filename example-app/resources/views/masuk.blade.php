@@ -1,62 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-</head>
-<body>
-    
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class=" navbar-brand " href="# "> <img src={{ asset('/image/logoUT.png') }} alt="logoUT" width="60" height="48"> </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Menu
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-    <h1 class=" p-3 fs-3 fw-bold text-primary ">Selamat Datang di Universitas Terbuka</h1>
+@extends ('layout.halutama')
+@section ('content')
 
-    <a type="button" href='/login' class=" ms-3 btn btn-primary ">LOGIN</a>
-</body>
-</html>
+
+ 
+      
+      <h3 class=" p-1 fs-3 fw-bold text-primary ">Selamat Datang di Universitas Terbuka , {{ $user }}</h3>
+      @for ($i = 1; $i < 10; $i++)
+          item ke-{{ $i }}
+      @endfor
+
+      <h4 class=" ms-3 ">Usia : {{ $usia }}</h4>
+
+
+
+      @switch($grade)
+          @case($grade >= 90)
+              <h4>Grade : A</h4>
+          @break
+
+          @case($grade >= 80)
+              <h4>Grade : B</h4>
+          @break
+
+          @default
+              <h4>Grade : C</h4>
+      @endswitch
+
+      @if ($usia >= 21)
+          <h4>Kategori Dewasa</h4>
+      @elseif ($usia >= 13)
+          <h4>Kategori Remaja</h4>
+      @else
+          <h4>Ketegori Anak-anak</h4>
+      @endif
+      <h4 class=" ms-3 ">
+
+          @if ($isMember)
+              <h4>Anda adalah Member</h4>
+          @else
+              <h4>Anda Bukan Member</h4>
+          @endif
+
+      </h4>
+
+
+      <a type="button" href='/login' class=" ms-3 btn btn-primary ">LOGIN</a>
+
+
+      <h3>List Mahasiswa</h3>
+
+
+      <table class="table table-bordered table table-striped">
+          <thead class ="table-info">
+              <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">No Induk</th>
+                  <th scope="col">Nilai</th>
+                  <th scope="col">Kategori</th>
+              </tr>
+          </thead>
+          <tbody>
+              @foreach ($datamahasiswa as $item)
+                  <tr>
+                      <th scope="row">{{ $loop->index + 1 }}</th>
+                      <td>{{ $item['nama'] }}</td>
+                      <td>{{ $item['No_induk'] }}</td>
+                      <td> {{ $item['nilai'] }}</td>
+                      @switch($item['nilai'])
+                          @case($item['nilai'] >= 90)
+                              <td>A</td>
+                          @break
+
+                          @case($item['nilai'] >= 80)
+                              <td>B</td>
+                          @break
+
+                          @case($item['nilai'] >= 70)
+                              <td>C</td>
+                          @break
+
+                          @case($item['nilai'] >= 60)
+                              <td>D</td>
+                          @break
+
+                          @default
+                              <td>E</td>
+                      @endswitch
+                  </tr>
+              @endforeach
+
+          </tbody>
+      </table>
+
+
+
+      
+      <p class=" p-3 text-info">Copyright {{ date('Y') }} UnivTerbuka</p>
+  
+      @endsection
