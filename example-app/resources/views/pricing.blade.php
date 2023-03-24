@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>DAFTAR HARGA MODUL</h1>
-</body>
-</html>
+@extends ('layout.halutama')
+@section ('content')
+
+    <h4>HALAMAN Pembelajaran dan Ujian</h4>
+   {{--}} <a href="/datamhs"> DAFTAR NILAI MAHASISWA </a>--}}
+    <div class="d-grid gap-2 col-2 ">
+    <x-button text=Submit color=success size=btn-sm/>
+    <x-button text=Kirim color=warning size=btn-lg/>
+    <x-button text=Register color=info/>
+    <x-button text=Next/>
+    </div>
+@endsection

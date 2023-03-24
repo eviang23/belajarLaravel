@@ -1,56 +1,13 @@
-@extends ('layout.halutama')
-@section ('content')
- 
-      
-      <h3 class=" fw-bold text-primary ">Selamat Datang di Universitas Terbuka , {{ $user }}</h3>
-      <p>
-        <h5 class="fs-6 fw-light fst-italic text-danger"> @for ($i = 1; $i < 10; $i++)
-        item ke-{{ $i }}
-    @endfor</h5>
-        </p>
-       
-
-      <p><a type="button" href='/login' class=" btn btn-primary ">LOGIN</a> </p>
-
-      <p><a type="button" href='/DP' class=" btn btn-primary ">Silakan Lihat Data Pribadi Anda</a> </p>
-{{--}}
-      <p><h4>Usia : {{ $usia }}</h4>
-
-      @switch($grade)
-          @case($grade >= 90)
-              <h4>Grade : A</h4>
-          @break
-
-          @case($grade >= 80)
-              <h4>Grade : B</h4>
-          @break
-
-          @default
-              <h4>Grade : C</h4>
-      @endswitch
-
-      @if ($usia >= 21)
-          <h4>Kategori Dewasa</h4>
-      @elseif ($usia >= 13)
-          <h4>Kategori Remaja</h4>
-      @else
-          <h4>Ketegori Anak-anak</h4>
-      @endif
-      <h4 class=" ms-3 ">
-
-          @if ($isMember)
-              <h4>Anda adalah Member</h4>
-          @else
-              <h4>Anda Bukan Member</h4>
-          @endif
-
-      </h4>
-    </p>
-
-     --}}
-
-
-      <h3>List Mahasiswa</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h3>List Mahasiswa</h3>
 
 
       <table class="table table-bordered table table-striped">
@@ -64,7 +21,7 @@
               </tr>
           </thead>
           <tbody>
-              @foreach ($datamahasiswa as $item)
+              @foreach ($dtmhs as $item)
                   <tr>
                       <th scope="row">{{ $loop->index + 1 }}</th>
                       <td>{{ $item['nama'] }}</td>
@@ -96,9 +53,5 @@
           </tbody>
       </table>
 
-
-
-      
-      <p class=" p-3 text-info">Copyright {{ date('Y') }} UnivTerbuka</p>
-  
-      @endsection
+</body>
+</html>
