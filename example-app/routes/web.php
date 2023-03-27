@@ -81,18 +81,21 @@ Route::get('/home', [HomeController::class , 'index']);
     
 });*/
 
-Route::get('/Features', [HomeController::class , 'features']);
+Route::get('/Marketing_Registrasi', [HomeController::class , 'Marketing_Registrasi']);
 /*function () {
     return view('features', ['title' => 'Features']);
 });*/
 
-Route::get('/DaftarHarga', function () {
-    return view('pricing', ['title' => 'Pricing']);
+
+
+Route::get('/Pembelajaran_Ujian', function () {
+    return view('f_pembelajaran', ['title' => 'Pembelajaran dan Ujian']);
 });
+Route::get('/tutor/{id}', [HomeController::class, 'tutor']);
 
-
-Route::get('/datamhs', function () {
-    $DataMhsw = [
+Route::get('/datamhs', [HomeController::class , 'datanilai'] ); 
+/* {
+   /* $DataMhsw = [
         [
             "nama" => "Asri",
             "No_induk" => "12345",
@@ -122,11 +125,12 @@ Route::get('/datamhs', function () {
             "No_induk" => "12545",
             "nilai" => 45
         ]
-    ];
+    ]; 
 
     return view('daftarmahasiswa', ['dtmhs'=> $DataMhsw]);
-});
+}); */
 
+Route::get('/detail/{id}', [HomeController::class, 'detail']);
 
 Route::get('/DP', function () {
     $username = "Evi";

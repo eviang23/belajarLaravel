@@ -2,7 +2,7 @@
 @section ('content')
  
       
-      <h3 class=" fw-bold text-primary ">Selamat Datang di Universitas Terbuka , {{ $user }}</h3>
+      <h4 class=" fw-bold text-primary ">Selamat Datang di Universitas Terbuka , {{ $user }}</h4>
       <p>
         <h5 class="fs-6 fw-light fst-italic text-danger"> @for ($i = 1; $i < 10; $i++)
         item ke-{{ $i }}
@@ -50,7 +50,7 @@
      --}}
 
 
-      <h3>List Mahasiswa</h3>
+      {{--<h3>List Mahasiswa</h3>
 
 
       <table class="table table-bordered table table-striped">
@@ -94,11 +94,11 @@
               @endforeach
 
           </tbody>
-      </table>
+      </table> --}}
 
 
 
       
-      <p class=" p-3 text-info">Copyright {{ date('Y') }} UnivTerbuka</p>
+      {{--<p class=" p-1 text-info fixed-bottom">@Copyright {{ date('Y') }} UnivTerbuka</p> --}}
   
       @endsection

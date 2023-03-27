@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $listMahasiswa = [
+       /* $listMahasiswa = [
             [
                 "nama" => "Asri",
                 "No_induk" => "12345",
@@ -38,22 +39,18 @@ class HomeController extends Controller
                 "No_induk" => "12545",
                 "nilai" => 45
             ]
-        ];
+        ];  ( dipindahkan ke Mahasiswa.php)*/
     
         $username = "Evi";
         return view(
             'masuk', 
     
             [
-                'user' => $username,
-                'usia' => "20",
-                'isMember' => true,
-                'grade' => 90,
-                'datamahasiswa' => $listMahasiswa ,
-                'title' => 'home'
+                'title' => 'home',
+                'datamahasiswa' => Mahasiswa ::all() ,
+                'user' => $username
             
-                ]
-        );
+                ]);
     }
 
     public function masuk()
@@ -61,10 +58,35 @@ class HomeController extends Controller
         return view('latihanhome');
     }
 
-    public function features()
+    public function Marketing_Registrasi()
     {
         
-            return view('features', ['title' => 'Features']);
+            return view('f_marketing', ['title' => 'Marketing dan Registrasi']);
         
+    }
+
+    public function datanilai()
+    { 
+
+            return view('daftarmahasiswa', ['dtmhs'=> Mahasiswa::all()]);
+    }
+        
+    public function detail(Request $request)
+    { 
+
+            return view ('f_detail', [
+             'title' => 'Detail Mahasiswa',
+             'id' => $request->id,
+             'data' => Mahasiswa::find($request->id)   
+            ]);
+    }
+
+    public function dtTutor(Request $request)
+    { 
+            return view ('f_detailtutor', [
+             'title' => 'Detail Tutor',
+             'id' => $request->id,
+             'data' => DTutor::find($request->id)   
+            ]);
     }
 }

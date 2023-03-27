@@ -1,23 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h3>List Mahasiswa</h3>
+@extends ('layout.halutama')
+@section ('content')
+
+
+    <h3 class="text-center text-primary">Daftar Nilai Mahasiswa</h3>
 
 
       <table class="table table-bordered table table-striped">
-          <thead class ="table-info">
+          <thead class ="table-info ">
               <tr>
                   <th scope="col">No</th>
                   <th scope="col">Nama</th>
                   <th scope="col">No Induk</th>
                   <th scope="col">Nilai</th>
                   <th scope="col">Kategori</th>
+                  <th scope="col">Action</th>
               </tr>
           </thead>
           <tbody>
@@ -47,11 +43,14 @@
                           @default
                               <td>E</td>
                       @endswitch
+                        <td>
+                            <x-button-link text="Detail" url="/detail/{{ $item['id']}}" btnColor="info" />
+                        </td>
+
                   </tr>
               @endforeach
 
           </tbody>
       </table>
 
-</body>
-</html>
+@endsection
