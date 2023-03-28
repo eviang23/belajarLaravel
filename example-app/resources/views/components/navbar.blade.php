@@ -13,6 +13,7 @@
                     <a class="nav-link active text-primary " aria-current="page" href="#">Tentang UT-Yogya</a>
                     <a class="nav-link   {{ $title === 'Marketing_Registrasi' ? 'active' : '' }} "
                         href="/Marketing_Registrasi">Marketing&Registrasi</a>
+                                     
                     <a class="nav-link  {{ $title === 'Pembelajaran_Ujian' ? 'active' : '' }}"
                         href="/Pembelajaran_Ujian">Pembelajaran&Ujian</a>
                     {{-- <a class="nav-link disabled">Disabled</a> --}}
@@ -20,11 +21,12 @@
                     <li class="nav-item dropdown ">
                         <a class="nav-link  dropdown-toggle " href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Mahasiswa
+                            AKADEMIK
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/datamhs">NILAI</a></li>
-                            <li><a class="dropdown-item" href="#">DATA TUTOR</a></li>
+                            <li><a class="dropdown-item" href="#">TUTORIAL ONLINE</a></li>
+                            <li><a class="dropdown-item" href="/dataTtr">DATA TUTOR</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

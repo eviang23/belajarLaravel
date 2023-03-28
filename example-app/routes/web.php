@@ -24,12 +24,27 @@ Route::get('/hello', function () {
 Route::get('/test', function () {
     return view('test');
 });
-Route::get('/login', [HomeController::class , 'masuk']); 
 
+Route::controller(HomeController::class)->group(function()  {
+Route::get('/login', 'masuk');
+Route::get('/home',  'index');
+Route::get('/datamhs', 'datanilai' );
+Route::get('/detail/{id}',  'detail');
+Route::get('/dataTtr',  'datatutor' ); 
+Route::get('/tutor/{id}', 'detail_tutor');
+Route::get('/Marketing_Registrasi', 'Marketing_Registrasi');
+Route::get('/Pembelajaran_Ujian', 'Pembelajaran_Ujian');
+
+}
+);
+
+/* dimasukkan ke grup 
+Route::get('/login', [HomeController::class , 'masuk']); 
 /*{
     return view('latihanhome');
 });*/
-Route::get('/home', [HomeController::class , 'index']);
+/* dimasukkan ke grup
+Route::get('/home', [HomeController::class , 'index']); */
 /*{
    
     $listMahasiswa = [
@@ -38,25 +53,21 @@ Route::get('/home', [HomeController::class , 'index']);
             "No_induk" => "12345",
             "nilai" => 100
         ],
-
         [
             "nama" => "Bibi",
             "No_induk" => "12385",
             "nilai" => 89
         ],
-
         [
             "nama" => "Cici",
             "No_induk" => "12045",
             "nilai" => 63
         ],
-
         [
             "nama" => "Didi",
             "No_induk" => "10345",
             "nilai" => 76
         ],
-
         [
             "nama" => "Esri",
             "No_induk" => "12545",
@@ -67,7 +78,6 @@ Route::get('/home', [HomeController::class , 'index']);
     $username = "Evi";
     return view(
         'masuk', 
-
         [
             'user' => $username,
             'usia' => "20",
@@ -75,25 +85,24 @@ Route::get('/home', [HomeController::class , 'index']);
             'grade' => 90,
             'datamahasiswa' => $listMahasiswa ,
             'title' => 'home'
-        
-            ]
+                    ]
     );
     
 });*/
-
+ /*dimasukkan ke grup
 Route::get('/Marketing_Registrasi', [HomeController::class , 'Marketing_Registrasi']);
 /*function () {
     return view('features', ['title' => 'Features']);
 });*/
 
-
-
-Route::get('/Pembelajaran_Ujian', function () {
+/*dimasukkan ke grup
+Route::get('/Pembelajaran_Ujian', [HomeController::class , 'Pembelajaran_Ujian']); */
+/* {
     return view('f_pembelajaran', ['title' => 'Pembelajaran dan Ujian']);
-});
-Route::get('/tutor/{id}', [HomeController::class, 'tutor']);
+}); */
 
-Route::get('/datamhs', [HomeController::class , 'datanilai'] ); 
+/* dimasukkan grup
+Route::get('/datamhs', [HomeController::class , 'datanilai'] ); */
 /* {
    /* $DataMhsw = [
         [
@@ -101,25 +110,21 @@ Route::get('/datamhs', [HomeController::class , 'datanilai'] );
             "No_induk" => "12345",
             "nilai" => 100
         ],
-
         [
             "nama" => "Bibi",
             "No_induk" => "12385",
             "nilai" => 89
         ],
-
         [
             "nama" => "Cici",
             "No_induk" => "12045",
             "nilai" => 63
         ],
-
         [
             "nama" => "Didi",
             "No_induk" => "10345",
             "nilai" => 76
         ],
-
         [
             "nama" => "Esri",
             "No_induk" => "12545",
@@ -130,7 +135,14 @@ Route::get('/datamhs', [HomeController::class , 'datanilai'] );
     return view('daftarmahasiswa', ['dtmhs'=> $DataMhsw]);
 }); */
 
-Route::get('/detail/{id}', [HomeController::class, 'detail']);
+/* dimasukkan ke grup
+Route::get('/detail/{id}', [HomeController::class, 'detail']); */
+
+
+/* dimasukkan di grup 
+Route::get('/dataTtr', [HomeController::class , 'datatutor'] ); 
+
+Route::get('/tutor/{id}', [HomeController::class, 'detail_tutor']); */
 
 Route::get('/DP', function () {
     $username = "Evi";
@@ -145,3 +157,4 @@ Route::get('/DP', function () {
 });
 
 Route::get('/auth/submit', [AuthController::class , 'IndexSubmit']);
+
