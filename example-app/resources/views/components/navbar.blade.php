@@ -24,9 +24,9 @@
                             AKADEMIK
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/datamhs">NILAI</a></li>
-                            <li><a class="dropdown-item" href="#">TUTORIAL ONLINE</a></li>
+                            <li><a class="dropdown-item" href="/datamhs">DATA NILAI</a></li>
                             <li><a class="dropdown-item" href="/dataTtr">DATA TUTOR</a></li>
+                            <li><a class="dropdown-item" href="#">TUTORIAL ONLINE</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -34,16 +34,33 @@
                         </ul>
                     </li>
 
+                    <a class="nav-link  {{ $title === 'IndexLogin' ? 'active' : '' }}"
+                        href="/auth/login">LOGIN</a>
+                    <li class="nav-item">
+                        <form action="/auth/logout" method="POST">  
+                            @csrf
+                            <x-button type="Submit" colour="outline-warning" text="Log Out" />
+                        </form>
+                    </li>
+
+
+                
+
+
+                    <a class="nav-link  {{ $title === 'IndexRegister' ? 'active' : '' }}"
+                        href="/auth/register">REGISTER</a>
 
                 </div>
             </ul>
-
+            {{--  
             <span>
                 <form class="d-flex mr-3" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success  " type="submit">Search</button>
                 </form>
             </span>
+            --}}
+
         </div>
     </div>
 </nav>

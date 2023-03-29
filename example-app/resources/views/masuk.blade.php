@@ -1,19 +1,19 @@
 @extends ('layout.halutama')
-@section ('content')
- 
-      
-      <h4 class=" fw-bold text-primary ">Selamat Datang di Universitas Terbuka , {{ $user }}</h4>
-      <p>
-        <h5 class="fs-6 fw-light fst-italic text-danger"> @for ($i = 1; $i < 10; $i++)
-        item ke-{{ $i }}
-    @endfor</h5>
-        </p>
-       
+@section('content')
+    <h4 class=" fw-bold text-primary ">
+        Selamat Datang di Universitas Terbuka , {{ $user }}</h4>
+    <p>
+    <h5 class="fs-6 fw-light fst-italic text-danger">
+        @for ($i = 1; $i < 10; $i++)
+            item ke-{{ $i }}
+        @endfor
+    </h5>
+    </p>
 
-      <p><a type="button" href='/login' class=" btn btn-primary ">LOGIN</a> </p>
+ {{--    <p><a type="button" href='/login' class=" btn btn-primary ">LOGIN</a> </p>    --}}
 
-      <p><a type="button" href='/DP' class=" btn btn-primary ">Silakan Lihat Data Pribadi Anda</a> </p>
-{{--}}
+    <p><a type="button" href='/DP' class=" btn btn-primary ">Silakan Lihat Data Pribadi Anda</a> </p>
+    {{-- }}
       <p><h4>Usia : {{ $usia }}</h4>
 
       @switch($grade)
@@ -50,7 +50,7 @@
      --}}
 
 
-      {{--<h3>List Mahasiswa</h3>
+    {{-- <h3>List Mahasiswa</h3>
 
 
       <table class="table table-bordered table table-striped">
@@ -98,7 +98,6 @@
 
 
 
-      
-      {{--<p class=" p-1 text-info fixed-bottom">@Copyright {{ date('Y') }} UnivTerbuka</p> --}}
-  
-      @endsection
+
+    {{-- <p class=" p-1 text-info fixed-bottom">@Copyright {{ date('Y') }} UnivTerbuka</p> --}}
+@endsection

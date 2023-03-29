@@ -1,1 +1,1 @@
-<button type="button" class="btn btn-{{$color}} {{$size}}"> {{ $text ?? ""}}</button>
+<button type="{{ $type }}" clas="btn btn-{{$color}} {{$size}}"> {{ $text ?? ""}}</button>

@@ -50,6 +50,18 @@ class HomeController extends Controller
         );
     }
 
+    public function data_pribadi() 
+    {   $username = "Evi";
+        return view('datadiri',
+    [
+        'user' => $username,
+        'usia' => "20",
+        'isMember' => true,
+        'grade' => 90,
+           
+        ]
+    );
+    }
     public function masuk()
     {
         return view('latihanhome');
