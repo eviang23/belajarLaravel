@@ -50,17 +50,19 @@ class HomeController extends Controller
         );
     }
 
-    public function data_pribadi() 
-    {   $username = "Evi";
-        return view('datadiri',
-    [
-        'user' => $username,
-        'usia' => "20",
-        'isMember' => true,
-        'grade' => 90,
-           
-        ]
-    );
+    public function data_pribadi()
+    {
+        $username = "Evi";
+        return view(
+            'datadiri',
+            [
+                'user' => $username,
+                'usia' => "20",
+                'isMember' => true,
+                'grade' => 90,
+
+            ]
+        );
     }
     public function masuk()
     {
@@ -104,5 +106,58 @@ class HomeController extends Controller
             'id_tutor' => $request->id,
             'datator' => Tutor::find($request->id)
         ]);
+    }
+
+    public function indexAddMahasiswa()
+    {
+        return view('form_mahasiswa', ['title' => 'Tambah Data Mahasiswa']);
+    }
+
+    public function StoreMahasiswa(Request $request)
+    {
+        $validatedData = $request->validate(
+            [
+                "nama" => "required|min:3",
+                "No_induk" => "required|min:6|integer|unique:mahasiswas",
+                "nilai" => "required|integer|between:0,100",
+                "alamat" => "required|min:3",
+                "gender" => "required",
+                "usia" => "required"
+            ],
+            [
+                "nama.required" => "Nama Tidak Boleh Kosong !!",
+                "No_induk.required" => "No induk Tidak Boleh Kosong !!",
+                "nilai.unique" => "nilai Sudah Ada !!",
+                "alamat.required" => "alamat Tidak Boleh Kosong !!",
+                "gender.required" => "gender Tidak boleh kosng !!",
+                "usia.required" => "Usia Tidak Boleh Kosong !!",
+               
+            ]
+
+
+        );
+
+        Mahasiswa::create($validatedData);
+        return redirect ('/datamhs')->with('success', 'Berhasil tambah data mahasiswa !');
+    }
+
+    public function indexUpdateMahasiswa(Request $request)
+    {
+
+        return view('form_edit_mahasiswa',[
+            'title' => 'Edit Mahasisa',
+            'data' => Mahasiswa::find($request->id)
+
+        ]);
+    }
+
+    public function StoreUpdateMahasiswa(Request $request)
+    {
+         dd($request->all());  
+        /*return view('form_edit_mahasiswa',[
+            'title' => 'Edit Mahasisa',
+            'data' => Mahasiswa::find($request->id)
+
+        ]); */
     }
 }

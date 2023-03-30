@@ -30,12 +30,20 @@ Route::controller(HomeController::class)->group(
         Route::get('/DP',  'data_pribadi');
         Route::get('/login', 'masuk');
         Route::get('/home',  'index');
-        Route::get('/datamhs', 'datanilai');
+        Route::get('/datamhs', 'datanilai')->middleware('auth');/*  sdh logout , tdk bisa akses nilai */
         Route::get('/detail/{id}',  'detail');
-        Route::get('/dataTtr',  'datatutor');
+        Route::get('/dataTtr',  'datatutor')->middleware('auth');
         Route::get('/tutor/{id}', 'detail_tutor');
         Route::get('/Marketing_Registrasi', 'Marketing_Registrasi');
         Route::get('/Pembelajaran_Ujian', 'Pembelajaran_Ujian');
+
+        Route::get('/mahasiswa/tambah', 'indexAddMahasiswa');
+        Route::post('/mahasiswa/tambah', 'StoreMahasiswa');
+
+        Route::get('/mahasiswa/edit/{id}', 'IndexUpdateMahasiswa');
+        Route::put('/mahasiswa/edit/', 'StoreUpdateMahasiswa');
+        
+
     }
 );
 
@@ -167,10 +175,11 @@ Route::get('/auth/register', [AuthController::class , 'IndexRegister']);
 Route::controller(AuthController::class)->group(
     function () {
         Route::get('/auth/submit', 'IndexSubmit');
-        Route::get('/auth/login', 'IndexLogin');
-        Route::get('/auth/register', 'IndexRegister');
+        Route::get('/auth/login', 'IndexLogin')->middleware('guest') ->name('login'); /* middleware : jika sdh login, tdk bisa masuk ke menu lgin lg  */
+        Route::get('/auth/register', 'IndexRegister')->middleware('guest');
         Route::post('/auth/register', 'storeRegister');
         Route::post('/auth/login', 'storeLogin');
         Route::post('/auth/logout', 'storeLogout');
+       
     }
 );

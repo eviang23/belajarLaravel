@@ -7,23 +7,26 @@
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+    
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class=" me-auto mb-2 mb-lg-0">
                 <div class="navbar-nav ">
                     <a class="nav-link active text-primary " aria-current="page" href="#">Tentang UT-Yogya</a>
                     <a class="nav-link   {{ $title === 'Marketing_Registrasi' ? 'active' : '' }} "
                         href="/Marketing_Registrasi">Marketing&Registrasi</a>
-                                     
+
                     <a class="nav-link  {{ $title === 'Pembelajaran_Ujian' ? 'active' : '' }}"
                         href="/Pembelajaran_Ujian">Pembelajaran&Ujian</a>
                     {{-- <a class="nav-link disabled">Disabled</a> --}}
 
                     <li class="nav-item dropdown ">
-                        <a class="nav-link  dropdown-toggle " href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link  dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             AKADEMIK
                         </a>
                         <ul class="dropdown-menu">
+
+                            
                             <li><a class="dropdown-item" href="/datamhs">DATA NILAI</a></li>
                             <li><a class="dropdown-item" href="/dataTtr">DATA TUTOR</a></li>
                             <li><a class="dropdown-item" href="#">TUTORIAL ONLINE</a></li>
@@ -34,21 +37,28 @@
                         </ul>
                     </li>
 
-                    <a class="nav-link  {{ $title === 'IndexLogin' ? 'active' : '' }}"
-                        href="/auth/login">LOGIN</a>
-                    <li class="nav-item">
-                        <form action="/auth/logout" method="POST">  
-                            @csrf
-                            <x-button type="Submit" colour="outline-warning" text="Log Out" />
-                        </form>
-                    </li>
 
+                    @auth
 
-                
+                        {{-- ketika sudah login , maka yg muncul LOGOUT --}}
+                        <li class="nav-item">
+                            <form action="/auth/logout" method="POST">
+                                @csrf
+                                <x-button type="Submit" colour="outline-warning" text="Log Out" />
+                            </form>
+                        </li>
+                    @else
+                        {{-- Lketika belum login , akan tampil LOGIN dan REGISTER --}}
+                        <li>
+                            <a class="nav-link  {{ $title === 'IndexLogin' ? 'active' : '' }}" href="/auth/login">LOGIN</a>
+                        </li>
+                        <li>
+                            <a class="nav-link  {{ $title === 'IndexRegister' ? 'active' : '' }}"
+                                href="/auth/register">REGISTER</a>
+                        </li>
 
+                    @endauth
 
-                    <a class="nav-link  {{ $title === 'IndexRegister' ? 'active' : '' }}"
-                        href="/auth/register">REGISTER</a>
 
                 </div>
             </ul>

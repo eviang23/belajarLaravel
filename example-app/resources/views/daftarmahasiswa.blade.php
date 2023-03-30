@@ -1,6 +1,10 @@
 @extends ('layout.halutama')
 @section ('content')
 
+    <h1> Selamat Datang, {{ auth()->user()->name }} ! </h1>
+    <div class="form-text">
+            <x-button-link text="TAMBAH MAHASISWA" color="outline-primary" url="/mahasiswa/tambah" />
+    </div>
 
     <h3 class="text-center text-primary">Daftar Nilai Mahasiswa</h3>
 
