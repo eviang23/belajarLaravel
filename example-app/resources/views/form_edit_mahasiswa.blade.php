@@ -1,9 +1,9 @@
 @extends ('layout.halutama')
 @section('content')
-    <h5 class="  text-success fs-4 ms-1 fw-bold">FORM EDIT DATA MAHASISWA</h5>
+    <h5 class="  text-primary fs-4 ms-1 fw-bold">FORM EDIT DATA MAHASISWA</h5>
 
     <div class="container">
-        <form action="/mahasiswa/edit" method="POST">
+        <form action="/mahasiswa/edit/{{ $data['id'] }}" method="POST">
             @csrf
             @method('PUT')
             {{-- generated --}}
@@ -26,8 +26,8 @@
                 <label for="No_induk" class=" col-sm-2 form-label">No Induk</label>
                 <div class="col-sm-5">
                     <input type="number" class=" form-control @error('No_induk') is-invalid @enderror" id="No_induk"
-                        placeholder="Masukkan Nomor Induk Mahasiswa ..." name="No_induk" {{--  required (untuk validasi ganda) --}}
-                        value="{{ old('No_induk', $data['No_induk']) }}">
+                        placeholder="Masukkan Nomor Induk Mahasiswa ..." name="No_induk" 
+                        value="{{ old('No_induk', $data['No_induk']) }}" readonly>
                     @error('No_induk')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -96,7 +96,7 @@
                 </div>
             </div>
 
-            <div class="d-grid mt-2">
+            <div class="d-grid mt-2 col-sm-7">
                 <x-button  type="submit" text="Edit" color="outline-primary" />
             </div>
     </div>

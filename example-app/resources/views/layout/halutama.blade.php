@@ -18,6 +18,6 @@
         @yield('content')
       </div>
 
-      <p class=" p-1 text-primary fixed-bottom"> @Copyright {{ date('Y') }} UnivTerbuka</p>
+      
 </body>
 </html>

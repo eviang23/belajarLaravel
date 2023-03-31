@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Models\Tutor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 
 
 class HomeController extends Controller
@@ -81,7 +83,10 @@ class HomeController extends Controller
 
     public function datanilai()
     {
-        return view('daftarmahasiswa', ['dtmhs' => Mahasiswa::all()]);
+        if (!Gate::allows('isMahasiswa')) {     /* tambahan Gate */
+            abort(403);
+        }
+        return view('daftarmahasiswa', ['dtmhs' => Mahasiswa::paginate(2)]);
     }
 
     public function detail(Request $request)
@@ -129,35 +134,51 @@ class HomeController extends Controller
                 "No_induk.required" => "No induk Tidak Boleh Kosong !!",
                 "nilai.unique" => "nilai Sudah Ada !!",
                 "alamat.required" => "alamat Tidak Boleh Kosong !!",
-                "gender.required" => "gender Tidak boleh kosng !!",
+                "gender.required" => "gender Tidak boleh Kosong !!",
                 "usia.required" => "Usia Tidak Boleh Kosong !!",
-               
+
             ]
 
 
         );
 
         Mahasiswa::create($validatedData);
-        return redirect ('/datamhs')->with('success', 'Berhasil tambah data mahasiswa !');
+        return redirect('/datamhs')->with('success', 'Berhasil tambah data mahasiswa !');
     }
 
     public function indexUpdateMahasiswa(Request $request)
     {
 
-        return view('form_edit_mahasiswa',[
-            'title' => 'Edit Mahasisa',
+        return view('form_edit_mahasiswa', [
+            'title' => 'Edit Mahasiswa',
             'data' => Mahasiswa::find($request->id)
 
         ]);
     }
 
-    public function StoreUpdateMahasiswa(Request $request)
+    public function StoreUpdateMahasiswa(Request $request, $id)
     {
-         dd($request->all());  
-        /*return view('form_edit_mahasiswa',[
-            'title' => 'Edit Mahasisa',
-            'data' => Mahasiswa::find($request->id)
+            $validatedData = $request->validate(
+            [
+                "nama" => "min:3",
+                "No_induk" => "min:6|integer",
+                "nilai" => "integer|between:0,100",
+                "alamat" => "min:3",
+                "gender" => "",
+                "usia" => "integer|between:0,100"
+            ],
 
-        ]); */
+        );
+       
+        Mahasiswa::find($id)->update($validatedData)  ; 
+        return redirect('/datamhs')->with('success', 'Berhasil edit data mahasiswa !');
+        
+    }
+
+    public function destroy($id)
+    {
+        Mahasiswa::destroy($id); 
+        return redirect('/datamhs')->with('deleted', 'Berhasil Menghapus data mahasiswa !');
+        
     }
 }

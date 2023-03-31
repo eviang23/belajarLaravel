@@ -99,5 +99,5 @@
 
 
 
-    {{-- <p class=" p-1 text-info fixed-bottom">@Copyright {{ date('Y') }} UnivTerbuka</p> --}}
+    <p class=" p-1 text-info fixed-bottom">@Copyright {{ date('Y') }} UnivTerbuka</p>
 @endsection

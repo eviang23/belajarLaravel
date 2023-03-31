@@ -11,7 +11,8 @@
                 <label for="name" class=" col-sm-2 form-label">Nama</label>
                 <div class="col-sm-5">
                     <input type="text" class=" form-control @error('name') is-invalid @enderror" id="name"
-                        placeholder="Masukkan nama Anda ..." name="name" {{--  required (untuk validasi ganda)--}} value="{{ old('name') }}">
+                        placeholder="Masukkan nama Anda ..." name="name" {{--  required (untuk validasi ganda) --}}
+                        value="{{ old('name') }}">
 
                     @error('name')
                         <div class="invalid-feedback">

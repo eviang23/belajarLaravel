@@ -30,7 +30,7 @@ Route::controller(HomeController::class)->group(
         Route::get('/DP',  'data_pribadi');
         Route::get('/login', 'masuk');
         Route::get('/home',  'index');
-        Route::get('/datamhs', 'datanilai')->middleware('auth');/*  sdh logout , tdk bisa akses nilai */
+        Route::get('/datamhs', 'datanilai');/*  hanya user admin , yg bisa akses nilai */
         Route::get('/detail/{id}',  'detail');
         Route::get('/dataTtr',  'datatutor')->middleware('auth');
         Route::get('/tutor/{id}', 'detail_tutor');
@@ -41,7 +41,9 @@ Route::controller(HomeController::class)->group(
         Route::post('/mahasiswa/tambah', 'StoreMahasiswa');
 
         Route::get('/mahasiswa/edit/{id}', 'IndexUpdateMahasiswa');
-        Route::put('/mahasiswa/edit/', 'StoreUpdateMahasiswa');
+        Route::put('/mahasiswa/edit/{id}', 'StoreUpdateMahasiswa');
+
+        Route::delete('/mahasiswa/delete/{id}', 'destroy');
         
 
     }

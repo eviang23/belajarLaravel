@@ -1,12 +1,25 @@
 @extends ('layout.halutama')
 @section ('content')
 
+@if (session('success'))
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <strong>{{ session('success')}} </strong> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  @elseif (session('deleted'))
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>{{ session('deleted') }} </strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+ 
+  @endif
+
     <h1> Selamat Datang, {{ auth()->user()->name }} ! </h1>
     <div class="form-text">
             <x-button-link text="TAMBAH MAHASISWA" color="outline-primary" url="/mahasiswa/tambah" />
     </div>
 
-    <h3 class="text-center text-primary">Daftar Nilai Mahasiswa</h3>
+    <h3 class="text-center text-primary">Daftar Mahasiswa</h3>
 
 
       <table class="table table-bordered table table-striped">
@@ -23,7 +36,7 @@
           <tbody>
               @foreach ($dtmhs as $item)
                   <tr>
-                      <th scope="row">{{ $loop->index + 1 }}</th>
+                      <th scope="row">{{ $item->id }}</th> {{-- $loop->index + 1 , nomor di tabel akan mulai dari tiap halaman--}}
                       <td>{{ $item['nama'] }}</td>
                       <td>{{ $item['No_induk'] }}</td>
                       <td> {{ $item['nilai'] }}</td>
@@ -49,6 +62,7 @@
                       @endswitch
                         <td>
                             <x-button-link text="Detail" url="/detail/{{ $item['id']}}" btnColor="info" />
+                           
                         </td>
 
                   </tr>
@@ -57,4 +71,7 @@
           </tbody>
       </table>
 
+      {{-- pagination --}}
+      {{ $dtmhs ->Links() }}
+      
 @endsection

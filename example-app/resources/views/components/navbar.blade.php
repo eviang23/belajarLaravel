@@ -26,9 +26,19 @@
                         </a>
                         <ul class="dropdown-menu">
 
+                            {{-- Only Mahasiswa dan Admin --}}
+                            @canany(['isMahasiswa', 'isAdmin'])
                             
-                            <li><a class="dropdown-item" href="/datamhs">DATA NILAI</a></li>
+                            <li><a class="dropdown-item" href="/datamhs">DATA MAHASISWA</a></li>
+                            @endcanany
+
+                            {{-- only Tutor dan Admin --}}
+                            @canany(['isTutor', 'isAdmin'])
+                            
                             <li><a class="dropdown-item" href="/dataTtr">DATA TUTOR</a></li>
+                            @endcanany
+
+
                             <li><a class="dropdown-item" href="#">TUTORIAL ONLINE</a></li>
                             <li>
                                 <hr class="dropdown-divider">

@@ -4,6 +4,7 @@
 
     <div class="container">
         <form action="/mahasiswa/tambah" method="POST">
+            
             @csrf
             {{-- generated --}}
             {{-- <input type="hidden" name="_token" value={{ csrf_token() }}> --}}
@@ -95,7 +96,7 @@
                 </div>
             </div>
 
-            <div class="d-grid mt-2">
+            <div class="d-grid mt-2 col-sm-7">
                 <x-button type="submit" text="Tambah" color="outline-primary" />
             </div>
     </div>
