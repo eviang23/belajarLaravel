@@ -2,7 +2,7 @@
 @section('content')
     <h5 class="  text-primary fs-4 ms-1 fw-bold">FORM REGISTER</h5>
 
-    <div class="container">
+    <div class="container ">
         <form action="/auth/register" method="POST">
             @csrf
             {{-- generated --}}
@@ -77,8 +77,8 @@
                 Sudah Punya Akun ? <a href="/auth/login" class="text-decoration-none">Login</a>
             </div>
 
-            <div class="d-grid mt-2">
-                <x-button type="submit" text="Register" color="outline-primary" />
+            <div class="d-grid mt-2 col-sm-6">
+                <x-button  type="submit" text="Register" color="btn-warning" />
             </div>
 
         </form>

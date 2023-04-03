@@ -23,7 +23,8 @@ class TutorSeeder extends Seeder
                 "usia" => 45,
                 "email" => "taufan@gmail.com",
                 "bidang_keahlian" => "PDGK4302",
-                "periode_mengajar" => "2022"
+                "periode_mengajar" => "2022",
+                "mata_kuliah_id" =>"1"
             ],
             [
                 "nama_tutor" => "Bambang",
@@ -32,7 +33,8 @@ class TutorSeeder extends Seeder
                 "usia" => 48,
                 "email" => "bambang@gmail.com",
                 "bidang_keahlian" => "PAUD4500",
-                "periode_mengajar" => "2023"
+                "periode_mengajar" => "2023",
+                "mata_kuliah_id" =>"2"
             ],
             [
                 "nama_tutor" => "Yayuk",
@@ -41,7 +43,8 @@ class TutorSeeder extends Seeder
                 "usia" => 53,
                 "email" => "yayuk@gmail.com",
                 "bidang_keahlian" => "PDGK4102",
-                "periode_mengajar" => "2023"
+                "periode_mengajar" => "2023",
+                "mata_kuliah_id" =>"3"
             ],
             [
                 "nama_tutor" => "Endradi",
@@ -50,7 +53,8 @@ class TutorSeeder extends Seeder
                 "usia" => 55,
                 "email" => "endradi@gmail.com",
                 "bidang_keahlian" => "PDGK4200",
-                "periode_mengajar" => "2022"
+                "periode_mengajar" => "2022",
+                "mata_kuliah_id" =>"4"
             ],
             [
                 "nama_tutor" => "Nurlaili",
@@ -59,7 +63,8 @@ class TutorSeeder extends Seeder
                 "usia" => 58,
                 "email" => "nurlaili@gmail.com",
                 "bidang_keahlian" => "PAUD4301",
-                "periode_mengajar" => "2023"
+                "periode_mengajar" => "2023",
+                "mata_kuliah_id" =>"5"
             ],
         ]);
     }

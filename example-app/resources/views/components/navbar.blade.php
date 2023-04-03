@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
         <a class="navbar-brand" href="/home">
-            <img src="/image/Logo-UT_03.png" alt="Logo UT" width="170" height="33">
+            <img src="/image/logoUT.png" alt="Logo UT" width="55" height="40">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class=" me-auto mb-2 mb-lg-0">
                 <div class="navbar-nav ">
-                    <a class="nav-link active text-primary " aria-current="page" href="#">Tentang UT-Yogya</a>
+                    <a class="nav-link   " aria-current="page" href="#">Tentang UT-Yogya</a>
                     <a class="nav-link   {{ $title === 'Marketing_Registrasi' ? 'active' : '' }} "
                         href="/Marketing_Registrasi">Marketing&Registrasi</a>
 
@@ -46,32 +46,32 @@
                             <li><a class="dropdown-item" href="#">INFORMASI MAHASISWA</a></li>
                         </ul>
                     </li>
-
-
+                </div>  
+                </ul>   
+                   
                     @auth
-
                         {{-- ketika sudah login , maka yg muncul LOGOUT --}}
-                        <li class="nav-item">
+                        <h6 class="text-sm-start text-center text-info fs-5 fst-italic"> Welcome,  {{ auth()->user()->name }} ... </h6>
+                        <a class="nav-item  " >
                             <form action="/auth/logout" method="POST">
                                 @csrf
-                                <x-button type="Submit" colour="outline-warning" text="Log Out" />
+                                {{-- <x-button type="Submit" colour="outline-warning" text="Log Out" /> --}}
+                                <button type="Submit" class="btn btn-info" > Log Out</button>
                             </form>
-                        </li>
+                        </a>
                     @else
                         {{-- Lketika belum login , akan tampil LOGIN dan REGISTER --}}
-                        <li>
-                            <a class="nav-link  {{ $title === 'IndexLogin' ? 'active' : '' }}" href="/auth/login">LOGIN</a>
-                        </li>
-                        <li>
-                            <a class="nav-link  {{ $title === 'IndexRegister' ? 'active' : '' }}"
-                                href="/auth/register">REGISTER</a>
-                        </li>
-
+                        <form class="mr-auto "> 
+                            <a  class="nav-link    {{ $title === 'IndexLogin' ? 'active' : '' }}" href="/auth/login">LOGIN   |</a>
+                        </form>  
+                        <form >
+                            <a class="nav-link    {{ $title === 'IndexRegister' ? 'active' : '' }}"
+                                href="/auth/register">|   REGISTER</a>
+                            </form>
                     @endauth
-
-
-                </div>
-            </ul>
+                    
+                {{-- </div> --}}
+            {{-- </ul> --}}
             {{--  
             <span>
                 <form class="d-flex mr-3" role="search">

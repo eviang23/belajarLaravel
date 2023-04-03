@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Models\MataKuliah;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,8 +33,10 @@ Route::controller(HomeController::class)->group(
         Route::get('/home',  'index');
         Route::get('/datamhs', 'datanilai');/*  hanya user admin , yg bisa akses nilai */
         Route::get('/detail/{id}',  'detail');
+
         Route::get('/dataTtr',  'datatutor')->middleware('auth');
-        Route::get('/tutor/{id}', 'detail_tutor');
+        Route::get('/tutor/detail/{id}', 'detail_tutor');
+
         Route::get('/Marketing_Registrasi', 'Marketing_Registrasi');
         Route::get('/Pembelajaran_Ujian', 'Pembelajaran_Ujian');
 
@@ -44,10 +47,29 @@ Route::controller(HomeController::class)->group(
         Route::put('/mahasiswa/edit/{id}', 'StoreUpdateMahasiswa');
 
         Route::delete('/mahasiswa/delete/{id}', 'destroy');
-        
 
+        Route::get('/tutor/tambah', 'indexAddTutor');
+        Route::post('/tutor/tambah', 'StoreTutor');
+
+        Route::get('/tutor/edit/{id}', 'IndexUpdateTutor');
+        Route::put('/tutor/edit/{id}', 'StoreUpdateTutor');
+
+        Route::delete('/tutor/delete/{id}', 'destroyTutor');
     }
 );
+
+//route model binding
+Route::get('/mata-kuliah/detail/{mataKuliah}', function (MataKuliah  $mataKuliah)
+//  $mataKuliah->nama_matakul;
+{
+    return view(
+        'detail-matakuliah',
+        [
+            'title' => 'Detail Mata Kuliah',
+            'data' => $mataKuliah
+        ]
+    );
+});
 
 /* dimasukkan ke grup 
 Route::get('/login', [HomeController::class , 'masuk']); 
@@ -177,11 +199,13 @@ Route::get('/auth/register', [AuthController::class , 'IndexRegister']);
 Route::controller(AuthController::class)->group(
     function () {
         Route::get('/auth/submit', 'IndexSubmit');
-        Route::get('/auth/login', 'IndexLogin')->middleware('guest') ->name('login'); /* middleware : jika sdh login, tdk bisa masuk ke menu lgin lg  */
-        Route::get('/auth/register', 'IndexRegister')->middleware('guest');
+        Route::get('/auth/login', 'IndexLogin')->middleware('guest')->name('login'); /* middleware : jika sdh login, tdk bisa masuk ke menu lgin lg  */
+        Route::get('/auth/register', 'IndexRegister');
         Route::post('/auth/register', 'storeRegister');
         Route::post('/auth/login', 'storeLogin');
         Route::post('/auth/logout', 'storeLogout');
-       
     }
 );
+
+
+// Route::get('/auth/register', 'IndexRegister')->middleware('guest');

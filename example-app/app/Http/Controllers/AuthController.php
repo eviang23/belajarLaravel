@@ -39,7 +39,7 @@ class AuthController extends Controller
         $validatedData = $request->validate(
             [
                 "name" => "required|min:3|max:30|alpha:ascii",
-                "email" => "required|email:dns|unique:users|lowercase ", /*  users : nama tabel*/
+                "email" => "required|unique:users,email|lowercase|email:dns ", /*  users : nama tabel*/
                 "password" => "required|min:8|confirmed", /* confirmed mengecek password dngn bwh nya password confirmed  sama atau tidak*/
                 "password_confirmation" => "required|min:8",
             ],
@@ -67,7 +67,7 @@ class AuthController extends Controller
 
         $credentials = $request->validate([
             "email" => "required|email",
-            "password" => "required|min:8",
+            "password" => "required",
         ]);
 
 
