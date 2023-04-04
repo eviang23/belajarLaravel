@@ -62,8 +62,7 @@ Route::controller(HomeController::class)->group(
 Route::get('/mata-kuliah/detail/{mataKuliah}', function (MataKuliah  $mataKuliah)
 //  $mataKuliah->nama_matakul;
 {
-    return view(
-        'detail-matakuliah',
+    return view('detail-matakuliah',
         [
             'title' => 'Detail Mata Kuliah',
             'data' => $mataKuliah

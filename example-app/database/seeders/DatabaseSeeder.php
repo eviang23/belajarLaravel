@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             MataKuliahSeeder::class,
             MahasiswaSeeder::class,
             TutorSeeder::class,
+            MataKuliahTutorSeeder::class,
             // KeahlianSeeder::class,
             
 

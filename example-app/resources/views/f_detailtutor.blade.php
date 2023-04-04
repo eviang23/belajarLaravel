@@ -18,6 +18,15 @@
                 <li class="list-group-item">Email : {{ $datator['email'] }}</li>
                 <li class="list-group-item">Bidang Keahlian : {{ $datator['bidang_keahlian'] }}</li>
                 <li class="list-group-item">Periode Mengajar : {{ $datator['periode_mengajar'] }}</li>
+
+                <li class="list-group-item">Matakuliah :
+                    @foreach ($datator->mataKuliahs as $data)
+                        <x-button-link btnColor="warning" textColor="black" url="/mata-kuliah/detail/{{ $data->id }}"
+                            text="{{ $data->nama_matakul }}" />
+                    @endforeach
+
+                </li>
+
             </ul>
         </div>
     </div>

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use App\Models\MataKuliah;
 use App\Models\Tutor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-
-
+use Symfony\Contracts\Service\Attribute\Required;
 
 class HomeController extends Controller
 {
@@ -103,7 +103,17 @@ class HomeController extends Controller
 
     public function datatutor()
     {
-        return view('daftartutor', ['dt_tutor' => Tutor::paginate(2)]);
+        $tutors = Tutor::latest();
+
+        if (request('search')) {
+
+            $tutors->where('nama_tutor', 'like', '%' . request('search') . '%');
+        }
+
+        return view('daftartutor', [
+            'title'=>'Tutor',
+            'dt_tutor' => $tutors->get(),
+        ]);
     }
 
     public function detail_tutor(Request $request)
@@ -184,12 +194,18 @@ class HomeController extends Controller
 
     public function indexAddTutor()
     {
-        return view('form_tutor', ['title' => 'Tambah Data Tutor']);
+        return view('form_tutor', [
+            'title' => 'Tambah Data Tutor',
+            'matakuliah' => MataKuliah::all()
+        
+        ]);
     }
 
+
+    //Create Tutor
     public function StoreTutor(Request $request)
     {
-    //    return $request->all();
+        // return $request->all();
         $validatedData = $request->validate(
             [
                 "nama_tutor" => "required|min:3",
@@ -197,21 +213,42 @@ class HomeController extends Controller
                 "gender" => "required",
                 "usia" => "required|integer|between:0,100",
                 "email" => "required|unique:tutors|lowercase|email:dns ",
-                "bidang_keahlian" => "required|min:3",
+                // "bidang_keahlian" => "required|min:3",
+                // 'tahun_mengajar_awal' => "Required|integer|between:1999,2999" ,
+                // 'tahun_mengajar_akhir' => "Required|integer|between:1999,2999" ,
+                'matakuliah' => "required|max:4|min:1",
                 "periode_mengajar" => "required",
-            ],
-            [
-                "nama_tutor.required" => "Nama Tidak Boleh Kosong !!",
-                "id_tutor.unique" => "Id Tutor Tidak Boleh Kosong !!",
-                "gender.required" => "Gender Tidak boleh Kosong !!",
-                "usia.required" => "Usia Tidak Boleh Kosong !!",
-                "email.unique" => "Email Tidak Boleh Kosong !!",
-                "bidang_keahlian.required" => "Bidang Keahlian Tidak Boleh Kosong !!",
-                "periode_mengajar.required" => "Periode Mengajar Tidak Boleh Kosong !!",
+                // "mata_kuliah_id" => "required|integer"
+            // ],
+            // [
+            //     "nama_tutor.required" => "Nama Tidak Boleh Kosong !!",
+            //     "id_tutor.unique" => "Id Tutor Tidak Boleh Kosong !!",
+            //     "gender.required" => "Gender Tidak boleh Kosong !!",
+            //     "usia.required" => "Usia Tidak Boleh Kosong !!",
+            //     "email.unique" => "Email Tidak Boleh Kosong !!",
+            //     "bidang_keahlian.required" => "Bidang Keahlian Tidak Boleh Kosong !!",
+            //     "periode_mengajar.required" => "Periode Mengajar Tidak Boleh Kosong !!",
+            //     // "mata_kuliah_id.required" => "Mata Kuliah Id Tidak Boleh Kosong !!"
             ]
         );
 
-        Tutor::create($validatedData);
+        $tutor = Tutor::create([
+            
+            'nama_tutor' => $validatedData['nama_tutor'],
+            "id_tutor" => $validatedData['id_tutor'],
+            "gender" => $validatedData['gender'],
+            "usia" => $validatedData['usia'],
+            'email' => $validatedData['email'], 
+            
+            'periode_mengajar' => $validatedData['periode_mengajar'],
+
+            //Remove bidang_keahlian dan  mata_kuliah_id
+            "bidang_keahlian" => "",
+            "mata_kuliah_id" => 1,
+        ]);
+
+        //Save Multiple Matakuliah by tutor_id dalam table mata_kuliah_tutor
+        $tutor->mataKuliahs() ->attach($validatedData['matakuliah']);
         return redirect('/dataTtr')->with('success', 'Berhasil Tambah Data Tutor !');
     }
 
@@ -220,7 +257,8 @@ class HomeController extends Controller
 
         return view('form_edit_tutor', [
             'title' => 'Edit Tutor',
-            'datator' => Tutor::find($request->id)
+            'datator' => Tutor::find($request->id),
+            'matakuliah' => MataKuliah::all()
 
         ]);
     }
@@ -231,17 +269,32 @@ class HomeController extends Controller
             [
                 "nama_tutor" => "min:3",
                 "id_tutor" => "min:6|integer",
-                "gender" => "",
+                "gender" => "required",
                 "usia" => "min:6|integer",
-                "nilai" => "integer|between:0,100",
                 "email" => "required|unique:users,email|lowercase|email:dns ",
-                "bidang_keahlian" => "min:3",
-                "periode_mengajar" => "integer"
+                "periode_mengajar" => "required",
+                'matakuliah' => "required|max:4|min:1",
+                // "bidang_keahlian" => "min:3",
+                // "periode_mengajar" => "integer"
             ],
 
         );
 
-        Tutor::find($id)->update($validatedData);
+        //find Tutor
+        $tutor = Tutor::find($id);
+
+        $tutor->mataKuliahs() ->sync($validatedData['matakuliah']);
+
+        $tutor->update([
+            'nama_tutor' => $validatedData['nama_tutor'],
+            "id_tutor" => $validatedData['id_tutor'],
+            "gender" => $validatedData['gender'],
+            "usia" => $validatedData['usia'],
+            'email' => $validatedData['email'], 
+            'periode_mengajar' => $validatedData['periode_mengajar'],
+            "bidang_keahlian" => "",
+            "mata_kuliah_id" => 1,
+        ]);
         return redirect('/dataTtr')->with('success', 'Berhasil edit data tutor !');
     }
 

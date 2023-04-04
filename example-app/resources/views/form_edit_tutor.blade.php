@@ -88,7 +88,7 @@
             </div>
 
             {{-- Bidang keahlian --}}
-            <div class="mb-2 row ">
+            {{-- <div class="mb-2 row ">
                 <label for="bidang_keahlian" class=" col-sm-2 form-label">bidang_keahlian</label>
                 <div class="col-sm-5">
                     <textarea class=" form-control" id="bidang_keahlian" rows="3" placeholder="Masukkan Bidang Keahlian Mahasiswa ..."
@@ -99,7 +99,7 @@
                         </div>
                     @enderror
                 </div>
-            </div>
+            </div> --}}
 
             {{-- Periode Mengajar --}}
             <div class="mb-2 row ">
@@ -117,7 +117,30 @@
             </div>
 
 
+             {{-- Matakuliah  --}}
+             <div class="mb-2 row">
+                <label for="matakuliah" class=" col-sm-2 form-label"> matakuliah</label>
+                <div class="col-sm-5">
 
+                    {{-- Mengirim multiple value matakuliah --}}
+                    <select class="form-select @error('matakuliah') is-invalid  @enderror" 
+                        name="matakuliah[]"
+                        id="matakuliah" multiple >
+
+                        {{-- Looping Data Mata Kuliah --}}
+                        @foreach ($matakuliah as $item)
+                            <option value="{{ $item->id }}"> {{ $item->nama_matakul }} </option> 
+                       @endforeach
+
+                    </select>
+
+                        @error('matakuliah')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div> 
+                    @enderror
+                        </div>
+                </div>
 
 
             <div class="d-grid mt-2 col-sm-7">

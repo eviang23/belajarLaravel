@@ -1,13 +1,13 @@
 @extends ('layout.halutama')
 @section('content')
-    <h1> DETAIL MATA KULIAH | {{ $data->nama_matakul }} - {{ $data->kode }} </h1>
+    <h4 class="text-warning"> DETAIL MATA KULIAH | {{ $data->nama_matakul }} - {{ $data->kode }} </h4>
 
     {{-- <ul>
         <li> {{ $data->tutor->nama_tutor }} </li>
         <li> {{ $data->tutor->email }} </li>
     </ul> --}}
 
-    <h3 class="text-center text-primary">List Tutor</h3>
+    <h3 class="text-center text-primary mt-3">List Tutor</h3>
     <table class="mt-2 table table-bordered table table-striped">
         <thead class="table-info ">
             <tr>
@@ -47,4 +47,9 @@
 
         </tbody>
     </table>
+
+    <div class="mt-2 card-footer">
+        <x-button-link url="/dataTtr" btnColor="primary" text="Kembali" />
+    </div>
+    
 @endsection

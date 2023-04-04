@@ -21,9 +21,9 @@ class Tutor extends Model
 
     protected $guarded =['id'];
 
-public function mataKuliah()
+public function mataKuliahs()
 {
-    return $this->belongsTo(MataKuliah::class); 
+    return $this->belongsToMany(MataKuliah::class); 
 }
 
 }

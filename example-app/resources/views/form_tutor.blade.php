@@ -89,12 +89,12 @@
             </div>
 
             {{-- Bidang Keahlian --}}
-            <div class="mb-2 row ">
+            {{-- <div class="mb-2 row ">
                 <label for="bidang_keahlian" class=" col-sm-2 form-label">bidang keahlian</label>
                 <div class="col-sm-5">
                     <input type="text" class=" form-control @error('bidang_keahlian') is-invalid @enderror"
-                        id="bidang_keahlian" placeholder="Masukkan nama Tutor ..." name="bidang_keahlian"
-                        {{--  required (untuk validasi ganda) --}} value="{{ old('bidang_keahlian') }}">
+                        id="bidang_keahlian" placeholder="Masukkan nama Bidang Keahlian ..." name="bidang_keahlian"
+                        value="{{ old('bidang_keahlian') }}">
 
                     @error('bidang_keahlian')
                         <div class="invalid-feedback">
@@ -102,7 +102,7 @@
                         </div>
                     @enderror
                 </div>
-            </div>
+            </div> --}}
 
             {{-- <div class="mb-2 row ">
                 <label for="bidang_keahlian" class=" col-sm-2 form-label">Bidang Keahlian</label>
@@ -118,14 +118,15 @@
                 </div>
             </div> --}}
 
-            {{-- Tahun Mengajar --}}
+            {{-- periode Mengajar --}}
             <div class="mb-2 row">
-                <label for="tahun_mengajar" class=" col-sm-2 form-label"> tahun mengajar</label>
+                <label for="periode_mengajar" class=" col-sm-2 form-label"> Periode mengajar</label>
                 <div class="col-sm-5">
-                    <input type="number" class=" form-control @error('tahun_mengajar') is-invalid @enderror"
-                        id="tahun_mengajar" placeholder="Masukan tahun_mengajar ..." name="tahun_mengajar">
+                    <input type="number" class=" form-control @error('periode_mengajar') is-invalid @enderror"
+                        id="periode_mengajar" placeholder="Masukan periode_mengajar ..." name="periode_mengajar"
+                        value="{{ old('periode_mengajar') }}">
 
-                    @error('tahun_mengajar')
+                    @error('periode_mengajar')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -134,10 +135,10 @@
             </div>
 
             {{-- <div class="mb-2 row ">
-                <label for="tahun_mengajar" class=" col-sm-2 form-label">Tahun Mengajar</label>
+                <label for="periode_mengajar" class=" col-sm-2 form-label">Tahun Mengajar</label>
                 <div class="col-sm-5">
 
-                    <select class=" form-select @error('tahun_mengajar') is-invalid @enderror" name="tahun_mengajar">
+                    <select class=" form-select @error('periode_mengajar') is-invalid @enderror" name="periode_mengajar">
                        
                         <option disabled selected>Pilih Tahun </option>
                         <option>2020 </option>
@@ -145,43 +146,40 @@
                         <option>2022 </option>
                         <option>2023 </option>
                     </select>
-                    @error('tahun_mengajar')
+                    @error('periode_mengajar')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror --}}
 
-
-            {{--  
-                    <input type="number" class=" form-control @error('nilai') is-invalid @enderror" id="nilai"
-                        placeholder="Masukkan Nilai Mahasiswa ..." name="nilai" value="{{ old('nilai') }}">
-                    @error('nilai')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror --}}
-            {{-- </div>
-            </div> --}}
-
-            {{-- Matakuliah id --}}
+            {{-- Matakuliah  --}}
             <div class="mb-2 row">
-                <label for="mata_kuliah_id
-                " class=" col-sm-2 form-label"> mata_kuliah_id</label>
+                <label for="matakuliah" class=" col-sm-2 form-label"> matakuliah</label>
                 <div class="col-sm-5">
-                    <input type="number" class=" form-control @error('mata_kuliah_id') is-invalid @enderror" id="mata_kuliah_id"
-                        placeholder="Masukkan mata_kuliah_id  ..."  name="mata_kuliah_id">
 
-                    @error('mata_kuliah_id')
+                    {{-- Mengirim multiple value matakuliah --}}
+                    <select class="form-select @error('matakuliah') is-invalid  @enderror" 
+                        name="matakuliah[]"
+                        id="matakuliah" multiple >
+
+                        {{-- Looping Data Mata Kuliah --}}
+                        @foreach ($matakuliah as $item)
+                            <option value="{{ $item->id }}"> {{ $item->nama_matakul }} </option> 
+                       @endforeach
+
+                    </select>
+
+                        @error('matakuliah')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
+                        </div>
                 </div>
-            </div>
 
-            <div class="d-grid mt-2 col-sm-7">
-                <x-button type="submit" text="Tambah" color="outline-primary" />
-            </div>
+                <div class="d-grid mt-2 col-sm-7">
+                    <x-button type="submit" text="Tambah" color="outline-primary" />
+                </div>
 
         </form>
     </div>

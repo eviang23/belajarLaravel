@@ -17,6 +17,19 @@
         <x-button-link text="TAMBAH DATA TUTOR" color="outline-primary" url="/tutor/tambah" />
     </div>
 
+    {{-- search --}}
+    <div class="mt-5">
+        <div class=" mb-3">
+            <form action="/dataTtr" method="GET">
+                {{-- <div class="input-group mb-3"> --}}
+                    <input type="text" class="form-control" placeholder="Cari Tutor" name="search">
+                    <x-button type="Submit" text="Cari Tutor"/>
+                {{-- </div> --}}
+            </form>
+        </div>
+    </div>
+
+
     <h3 class="text-center text-primary">Data Tutor UT Yogyakarta</h3>
     <table class="mt-2 table table-bordered table table-striped">
         <thead class="table-info ">
@@ -36,12 +49,23 @@
         <tbody>
             @foreach ($dt_tutor as $item)
                 <tr>
-                    <th scope="row">{{$loop->iteration + $dt_tutor->firstItem() - 1}}</th>
+                    {{-- {{ $loop->iteration + $dt_tutor->firstItem() - 1 }} --}}
+                    <th scope="row">{{ $loop->index +  1 }}</th>
                     <td>{{ $item['nama_tutor'] }}</td>
                     <td>{{ $item['id_tutor'] }}</td>
 
-                    <td><a href="/mata-kuliah/detail/ {{ $item->mataKuliah->id }}"
-                        class="text-decoration-none">{{ $item->mataKuliah->nama_matakul }}</a></td> {{-- mataKuliah =nama functian di modelnya Tutor.php, nama_matakul = field di tabel Matakuliah --}}
+                    <td>
+                        <ul>
+                            @foreach ($item->mataKuliahs as $data)
+                                <li> {{ $data->nama_matakul }} </li>
+                            @endforeach
+                        </ul>
+                        {{-- <a href="/mata-kuliah/detail/ {{ $item->mataKuliah->id }}"
+                        class="text-decoration-none">{{ $item->mataKuliah->nama_matakul }}</a> --}}
+
+
+                    </td>
+                    {{-- mataKuliah =nama functian di modelnya Tutor.php, nama_matakul = field di tabel Matakuliah --}}
                     {{-- <td>{{ $item['usia'] }}</td>
                     <td>{{ $item['gender'] }}</td> --}}
                     <td>{{ $item['email'] }}</td>
@@ -58,5 +82,5 @@
     </table>
 
     {{-- pagination --}}
-    {{ $dt_tutor->Links() }}
+    {{-- {{ $dt_tutor->Links() }} --}}
 @endsection
